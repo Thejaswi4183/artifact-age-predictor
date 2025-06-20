@@ -1,4 +1,3 @@
-// src/app/auth/callback/page.tsx
 "use client";
 
 import { useEffect } from "react";
@@ -21,9 +20,9 @@ export default function AuthCallback() {
       }
 
       if (session) {
-        router.push("/upload"); // ✅ redirect to main app page
+        router.push("/upload");
       } else {
-        router.push("/auth"); // 👈 fallback to auth page
+        router.push("/auth");
       }
     };
 
@@ -31,8 +30,17 @@ export default function AuthCallback() {
   }, [router]);
 
   return (
-    <div className="container">
-      <p>Authenticating...</p>
+    <div className="container" style={{ textAlign: "center" }}>
+      <h2 className="header">🔐 Authenticating...</h2>
+      <p
+        style={{
+          fontFamily: "Cormorant Garamond, serif",
+          fontSize: "18px",
+          color: "#5a3d2b",
+        }}
+      >
+        Hold on as we verify your credentials.
+      </p>
     </div>
   );
 }

@@ -2,10 +2,14 @@
 
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { GiGreekTemple } from "react-icons/gi";
+import { FaUserCircle, FaScroll, FaSignOutAlt, FaUpload } from "react-icons/fa";
 
 export default function Header() {
   const session = useSession();
   const supabase = useSupabaseClient();
+  const pathname = usePathname();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -23,18 +27,37 @@ export default function Header() {
   return (
     <header className="main-header">
       <div className="left-title">
-        <h1 className="title-text">🏺 Ancient Artifact Predictor</h1>
+        <h1 className="title-text">
+          <GiGreekTemple style={{ marginRight: "8px", verticalAlign: "middle" }} />
+          Ancient Artifact Predictor
+        </h1>
       </div>
 
       <div className="right-controls">
-        <span className="user-name">👤 {displayName}</span>
+        <span className="user-name">
+          <FaUserCircle style={{ marginRight: "6px", verticalAlign: "middle" }} />
+          {displayName}
+        </span>
 
-        <Link href="/logs">
-          <button className="log-button">📂 View Logs</button>
-        </Link>
+        {pathname === "/logs" ? (
+          <Link className="view-upload-link" href="/upload">
+            <button className="log-button">
+              <FaUpload style={{ marginRight: "6px", verticalAlign: "middle" }} />
+              Back to Upload
+            </button>
+          </Link>
+        ) : (
+          <Link className="view-log-link" href="/logs">
+            <button className="log-button">
+              <FaScroll style={{ marginRight: "6px", verticalAlign: "middle" }} />
+              View Logs
+            </button>
+          </Link>
+        )}
 
         <button className="logout-button" onClick={handleLogout}>
-          🔓 Logout
+          <FaSignOutAlt style={{ marginRight: "6px", verticalAlign: "middle" }} />
+          Logout
         </button>
       </div>
     </header>

@@ -1,15 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
-import Toast from "@/components/Toast";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaGithub, FaUser, FaLock, FaEnvelope, FaUserPlus } from "react-icons/fa";
+
+const Toastify = require("toastify-js");
+import "toastify-js/src/toastify.css";
 
 export default function AuthTabs() {
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -18,13 +20,18 @@ export default function AuthTabs() {
     const email = form.email.value;
     const password = form.password.value;
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
       setError(error.message);
+      Toastify({
+        text: error.message,
+        duration: 3000,
+        close: false,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "#f44336",
+      }).showToast();
     } else {
       router.push("/upload");
     }
@@ -41,17 +48,30 @@ export default function AuthTabs() {
       email,
       password,
       options: {
-        data: {
-          username: fullName,
-        },
+        data: { username: fullName },
       },
     });
 
     if (error) {
       setError(error.message);
+      Toastify({
+        text: error.message,
+        duration: 3000,
+        close: false,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "#f44336",
+      }).showToast();
     } else {
-      setToastMessage("Check your email to confirm your registration.");
-      setIsLogin(true); // Redirect to login form
+      Toastify({
+        text: "Check your email to confirm your registration.",
+        duration: 3000,
+        close: false,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "#4CAF50",
+      }).showToast();
+      setIsLogin(true);
     }
   };
 
@@ -60,29 +80,37 @@ export default function AuthTabs() {
       provider: "github",
       options: {
         redirectTo: "http://localhost:3000/upload",
-        queryParams: {
-          prompt: "login", 
-        },
+        queryParams: { prompt: "login" },
       },
     });
 
-    if (error) setError(error.message);
+    if (error) {
+      setError(error.message);
+      Toastify({
+        text: error.message,
+        duration: 3000,
+        close: false,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "#f44336",
+      }).showToast();
+    }
   };
 
   return (
-    <div className="container auth">
+    <div className="auth-tabs">
       <div className="tab-buttons">
         <button
           className={`tab ${isLogin ? "active" : ""}`}
           onClick={() => setIsLogin(true)}
         >
-          Login
+          <FaUser /> Login
         </button>
         <button
           className={`tab ${!isLogin ? "active" : ""}`}
           onClick={() => setIsLogin(false)}
         >
-          Register
+          <FaUserPlus /> Register
         </button>
       </div>
 
@@ -96,14 +124,15 @@ export default function AuthTabs() {
             transition={{ duration: 0.3 }}
           >
             <form className="form" onSubmit={handleLogin}>
-              <input type="email" name="email" placeholder="Email" required />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                required
-              />
-              <button type="submit">SIGN IN</button>
+              <div className="input-group">
+                <FaEnvelope />
+                <input type="email" name="email" placeholder="Email" required />
+              </div>
+              <div className="input-group">
+                <FaLock />
+                <input type="password" name="password" placeholder="Password" required />
+              </div>
+              <button type="submit">🔐 SIGN IN</button>
             </form>
           </motion.div>
         ) : (
@@ -115,39 +144,30 @@ export default function AuthTabs() {
             transition={{ duration: 0.3 }}
           >
             <form className="form" onSubmit={handleRegister}>
-              <input
-                type="text"
-                name="fullname"
-                placeholder="Full Name"
-                required
-              />
-              <input type="email" name="email" placeholder="Email" required />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                required
-              />
-              <button type="submit">Register</button>
+              <div className="input-group">
+                <FaUser />
+                <input type="text" name="fullname" placeholder="Full Name" required />
+              </div>
+              <div className="input-group">
+                <FaEnvelope />
+                <input type="email" name="email" placeholder="Email" required />
+              </div>
+              <div className="input-group">
+                <FaLock />
+                <input type="password" name="password" placeholder="Password" required />
+              </div>
+              <button type="submit">📜 Register</button>
             </form>
           </motion.div>
         )}
       </AnimatePresence>
 
       <div className="divider"></div>
-      <h2>
-        <center>OR</center>
-      </h2>
+      <h2><center>OR</center></h2>
 
       <button onClick={handleGitHubLogin} className="github-button">
-        Sign in with GitHub
+        <FaGithub /> Sign in with GitHub
       </button>
-
-      {error && <p className="error">{error}</p>}
-
-      {toastMessage && (
-        <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
-      )}
     </div>
   );
 }

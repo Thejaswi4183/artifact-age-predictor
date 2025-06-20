@@ -1,7 +1,9 @@
 "use client";
+
 import { useSession } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 const UploadForm = () => {
   const session = useSession();
@@ -46,13 +48,19 @@ const UploadForm = () => {
   if (!session) return <p>Please log in to access prediction features.</p>;
 
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <h2 className="header">📜 Artifact Age Predictor</h2>
 
       <label className="file-upload">
         Select Image
         <input type="file" accept="image/*" onChange={handleImageChange} />
       </label>
+
       {image && (
         <img
           src={URL.createObjectURL(image)}
@@ -73,10 +81,13 @@ const UploadForm = () => {
       </button>
 
       {error && <p className="error">{error}</p>}
+
       {prediction && (
-        <center><p className="results">🏺 Predicted Age: {prediction} years</p></center>
+        <center>
+          <p className="results">🏺 Predicted Age: {prediction} years</p>
+        </center>
       )}
-    </div>
+    </motion.div>
   );
 };
 
