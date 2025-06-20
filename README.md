@@ -6,8 +6,8 @@ A full-stack web app that predicts the age of ancient artifacts (like coins, scu
 
 ## 🌐 Live Demo
 
-**Frontend:** [https://your-vercel-url.vercel.app](https://your-vercel-url.vercel.app)  
-**Backend API:** [https://your-fastapi-url](https://your-fastapi-url)
+**Frontend:** https://artifact-age-predictor.vercel.app/auth  
+**Backend API:** https://fastapi-app-production-a3db.up.railway.app/
 
 ---
 
