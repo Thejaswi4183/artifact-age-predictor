@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 export const metadata = {
   title: "Artifact Age Predictor",
   description: "Predict the age of historical artifacts using AI",
-  icon:"/favicon.ico",
+  icon: "/favicon.ico",
 };
 
 export default async function RootLayout({
@@ -23,6 +23,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <link rel="icon" href="/favicon.ico" />

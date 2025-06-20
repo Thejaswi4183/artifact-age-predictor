@@ -29,7 +29,7 @@ export default function Header() {
       <div className="left-title">
         <h1 className="title-text">
           <GiGreekTemple style={{ marginRight: "8px", verticalAlign: "middle" }} />
-          Ancient Artifact Predictor
+          Ancient Artifact Age Predictor
         </h1>
       </div>
 
