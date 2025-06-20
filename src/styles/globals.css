@@ -1,0 +1,456 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;700&display=swap");
+
+/* === Reset & Base Styling === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Cinzel", serif;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Cinzel", serif;
+  background: url('/ancient-paper-texture.jpeg') center/cover repeat;
+  color: #4a3b2a;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+/* === Container === */
+.container {
+  width: 100%;
+  max-width: 650px;
+  margin-top: 100px;
+  padding: 40px;
+  background: rgba(255, 248, 220, 0.97);
+  border: 4px solid #a67c52;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* === Header === */
+.header {
+  font-size: 32px;
+  font-weight: bold;
+  color: #6b4226;
+  margin-bottom: 25px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+.main-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #6b4226;
+  margin-bottom: 25px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height:15%;
+  width: 100%;
+  background: rgba(255, 248, 220, 0.9);
+  border-bottom: 2px solid #a67c52;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.left-title {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #5a3d2b;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.title-text {
+  margin: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.right-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  color: #4a3b2a;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.log-button {
+  font-family: 'Cormorant Garamond', serif;
+   font-size: 18px;
+  color: #4a3b2a;
+  background: #f0e0c0;
+  padding: 6px 6px 6px 6px;
+  border-radius: 6px;
+}
+
+/* === File Upload === */
+.file-upload {
+  display: block;
+  background: linear-gradient(to bottom, #c49a6c, #8b5a2b);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  width: fit-content;
+  margin: 0 auto 18px;
+  transition: all 0.3s ease;
+}
+
+.file-upload:hover {
+  background: linear-gradient(to bottom, #8b5a2b, #5e3b1d);
+  transform: scale(1.05);
+}
+
+.file-upload input {
+  display: none;
+}
+
+/* === Textarea / Input Field === */
+.input-field,
+.form input {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #8b5a2b;
+  border-radius: 8px;
+  background: rgba(250, 235, 200, 0.9);
+  color: #4a3b2a;
+  font-size: 16px;
+  font-family: "Cormorant Garamond", serif;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.input-field:focus,
+.form input:focus {
+  outline: none;
+  background: rgba(250, 235, 200, 1);
+  box-shadow: 0 0 8px rgba(155, 80, 10, 0.3);
+  border-color: #d4af37;
+}
+
+/* === Button === */
+button,
+.github-button {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s, background 0.3s, box-shadow 0.2s;
+}
+
+button {
+  background: linear-gradient(to bottom, #d4af37, #a67c00);
+  color: white;
+  margin-top: 20px;
+}
+
+button:hover {
+  background: linear-gradient(to bottom, #e0c068, #b8860b);
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+/* === GitHub Button === */
+.github-button {
+  background: linear-gradient(to bottom, #333, #000);
+  color: white;
+  margin-top: 20px;
+  font-family: 'Cinzel', serif;
+}
+
+.github-button:hover {
+  background: linear-gradient(to bottom, #444, #111);
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+}
+
+/* === Tabs === */
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  gap: 10px;
+}
+
+.tab {
+  padding: 10px 20px;
+  border: 2px solid #8b5a2b;
+  background-color: #f5deb3;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: 'Cinzel', serif;
+  transition: background 0.2s ease;
+}
+
+.tab.active {
+  background-color: #8750097c;
+  font-size: larger;
+  border: 4px solid #0909094b;
+  border-radius: 10px;
+}
+
+/* === Auth Form === */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* === Results & Errors === */
+.results,
+.error {
+  margin-top: 25px;
+  padding: 18px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Cormorant Garamond", serif;
+}
+
+.results {
+  background: rgba(189, 183, 107, 0.4);
+  border: 2px solid #b8860b;
+  color: #8b4513;
+}
+
+.error {
+  background: rgba(139, 69, 19, 0.3);
+  border: 2px solid #8b0000;
+  color: #8b0000;
+}
+/* === Header Bar === */
+.header-bar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: rgba(255, 248, 220, 0.9);
+  padding: 10px 16px;
+  border: 2px solid #8b5a2b;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  font-family: "Cormorant Garamond", serif;
+}
+
+/* === Username === */
+.username {
+  font-size: 16px;
+  color: #5a3b2b;
+  font-weight: 600;
+}
+
+/* === Logout Button === */
+.logout-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.logout-button {
+  padding: 10px 16px;
+  background: linear-gradient(to bottom, #b22222, #8b0000);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.logout-button:hover {
+  background: linear-gradient(to bottom, #dc143c, #a30000);
+  transform: translateY(-2px);
+}
+
+/* === Image Preview === */
+.image-preview {
+  display: block;
+  margin: 12px auto 24px; /* centers it */
+  max-width: 300px;
+  max-height: 200px;
+  border-radius: 10px;
+  border: 3px solid #a67c52;
+  object-fit: contain;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.image-preview:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+.log-entry {
+  margin: 30px 0;
+  padding: 20px;
+  background: rgba(255, 248, 220, 0.85);
+  border: 2px solid #a67c52;
+  border-radius: 12px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.log-entry p {
+  margin: 8px 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  color: #4a3b2a;
+}
+
+.log-username {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #6b4226;
+}
+
+
+/* === Form Label === */
+label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  margin-bottom: 6px;
+  display: inline-block;
+  color: #5a3d2b;
+  font-weight: 600;
+}
+
+/* === Divider === */
+.divider {
+  margin: 30px 0;
+  height: 1px;
+  background-color: #a67c52;
+  opacity: 0.3;
+}
+
+/* === Animation Keyframes === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Responsive Layout === */
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 24px;
+    margin-top: 60px;
+  }
+
+  .header {
+    font-size: 24px;
+  }
+
+  .form input,
+  .input-field,
+  .github-button {
+    font-size: 15px;
+  }
+
+  button {
+    font-size: 16px;
+  }
+}
+/* === Footer === */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(245, 222, 179, 0.8);
+  color: #4a3b2a;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 16px;
+  border-top: 2px solid #8b5a2b;
+  margin-top: 20px;
+}
+
+
+@media screen and (max-width: 500px) {
+  .footer {
+    font-size: 14px;
+    padding: 15px;
+  }
+}
+.custom-toast {
+  position: fixed;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  border-radius: 8px;
+  font-size: 1rem;
+  max-width: 350px;
+  padding: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background-color: #4CAF50; /* Default green for success */
+  color: white;
+  text-align: center;
+}
+
+@keyframes toast-fadein {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
