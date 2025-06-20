@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import SupabaseProvider from "../components/SupabaseProvider";
 import ClientLayout from "../components/ClientLayout";
+import ThemeRegistry from "../components/ThemeRegistry"; // ✅ import here
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
@@ -29,11 +30,13 @@ export default async function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        <SupabaseProvider session={session}>
-          <div className="page-wrapper">
-            <ClientLayout>{children}</ClientLayout>
-          </div>
-        </SupabaseProvider>
+        <ThemeRegistry>
+          <SupabaseProvider session={session}>
+            <div className="page-wrapper">
+              <ClientLayout>{children}</ClientLayout>
+            </div>
+          </SupabaseProvider>
+        </ThemeRegistry>
       </body>
     </html>
   );
