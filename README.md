@@ -86,6 +86,8 @@ Response:
 
 ```
 
+---
+
 🧾 Logs
 
 Logs are stored in the artifacts table
