@@ -452,10 +452,6 @@ button:disabled {
 
 /* === Footer === */
 .footer {
-  position: relative;
-  bottom: 0;
-  left: 0;
-  width: 100%;
   text-align: center;
   padding: 20px;
   background: rgba(245, 222, 179, 0.88);
@@ -464,9 +460,27 @@ button:disabled {
   font-size: 16px;
   border-top: 2px solid #8b5a2b;
   animation: fadeInUp 0.8s ease-out;
-  margin-top: auto;
   z-index: 10;
 }
+
+.social-icons {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icons a {
+  font-size: 24px;
+  color: #4a3b2a;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #a67c52;
+  transform: scale(1.2);
+}
+
 
 /* === Animations === */
 @keyframes fadeIn {
