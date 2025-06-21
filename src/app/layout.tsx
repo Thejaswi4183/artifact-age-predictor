@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import SupabaseProvider from "../components/SupabaseProvider";
 import ClientLayout from "../components/ClientLayout";
-import ThemeRegistry from "../components/ThemeRegistry"; // ✅ import here
+import ThemeRegistry from "../components/ThemeRegistry";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
