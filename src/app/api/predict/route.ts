@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
           prediction: age,
           image_url: publicUrl,
           user_id: session.user.id,
-          created_at: new Date().toISOString(),
+          created_at: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
         },
       ]);
 
