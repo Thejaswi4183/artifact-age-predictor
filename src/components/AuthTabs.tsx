@@ -4,7 +4,13 @@ import { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaGithub, FaUser, FaLock, FaEnvelope, FaUserPlus } from "react-icons/fa";
+import {
+  FaGithub,
+  FaUser,
+  FaLock,
+  FaEnvelope,
+  FaUserPlus,
+} from "react-icons/fa";
 
 const Toastify = require("toastify-js");
 import "toastify-js/src/toastify.css";
@@ -20,7 +26,10 @@ export default function AuthTabs() {
     const email = form.email.value;
     const password = form.password.value;
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
     if (error) {
       setError(error.message);
@@ -79,7 +88,10 @@ export default function AuthTabs() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: "http://localhost:3000/upload",
+        redirectTo:
+          typeof window !== "undefined"
+            ? `${window.location.origin}/upload`
+            : "https://artifact-age-predictor.vercel.app/upload",
         queryParams: { prompt: "login" },
       },
     });
@@ -130,7 +142,12 @@ export default function AuthTabs() {
               </div>
               <div className="input-group">
                 <FaLock />
-                <input type="password" name="password" placeholder="Password" required />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  required
+                />
               </div>
               <button type="submit">🔐 SIGN IN</button>
             </form>
@@ -146,7 +163,12 @@ export default function AuthTabs() {
             <form className="form" onSubmit={handleRegister}>
               <div className="input-group">
                 <FaUser />
-                <input type="text" name="fullname" placeholder="Full Name" required />
+                <input
+                  type="text"
+                  name="fullname"
+                  placeholder="Full Name"
+                  required
+                />
               </div>
               <div className="input-group">
                 <FaEnvelope />
@@ -154,7 +176,12 @@ export default function AuthTabs() {
               </div>
               <div className="input-group">
                 <FaLock />
-                <input type="password" name="password" placeholder="Password" required />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  required
+                />
               </div>
               <button type="submit">📜 Register</button>
             </form>
@@ -163,7 +190,9 @@ export default function AuthTabs() {
       </AnimatePresence>
 
       <div className="divider"></div>
-      <h2><center>OR</center></h2>
+      <h2>
+        <center>OR</center>
+      </h2>
 
       <button onClick={handleGitHubLogin} className="github-button">
         <FaGithub /> Sign in with GitHub
