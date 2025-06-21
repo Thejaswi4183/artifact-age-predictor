@@ -88,7 +88,10 @@ export default function AuthTabs() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: "https://artifact-age-predictor.vercel.app/upload", 
+       redirectTo:
+      typeof window !== 'undefined'
+        ? `${window.location.origin}/upload`
+        : undefined,
         queryParams: {
           prompt: "login", 
         },
