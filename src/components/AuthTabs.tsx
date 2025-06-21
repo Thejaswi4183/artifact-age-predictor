@@ -10,6 +10,7 @@ import {
   FaLock,
   FaEnvelope,
   FaUserPlus,
+  FaGoogle,
 } from "react-icons/fa";
 
 const Toastify = require("toastify-js");
@@ -84,31 +85,26 @@ export default function AuthTabs() {
     }
   };
 
-  const handleGitHubLogin = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "github",
-      options: {
-       redirectTo:
-      typeof window !== 'undefined'
-        ? `${window.location.origin}/upload`
-        : undefined,
-        queryParams: {
-          prompt: "login", 
-        },
-      },
-    });
-    if (error) {
-      setError(error.message);
-      Toastify({
-        text: error.message,
-        duration: 3000,
-        close: false,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#f44336",
-      }).showToast();
-    }
-  };
+ const handleOAuthLogin = async (provider: "github" | "google") => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: "https://artifact-age-predictor.vercel.app/upload",
+      queryParams: { prompt: "login" }, // optional
+    },
+  });
+
+  if (error) {
+    Toastify({
+      text: error.message,
+      duration: 3000,
+      gravity: "top",
+      position: "center",
+      backgroundColor: "#f44336",
+    }).showToast();
+  }
+};
+
 
   return (
     <div className="auth-tabs">
@@ -195,9 +191,14 @@ export default function AuthTabs() {
         <center>OR</center>
       </h2>
 
-      <button onClick={handleGitHubLogin} className="github-button">
-        <FaGithub /> Sign in with GitHub
-      </button>
+      <button onClick={() => handleOAuthLogin("github")} className="github-button">
+  <FaGithub /> Sign in with GitHub
+</button>
+
+<button onClick={() => handleOAuthLogin("google")} className="google-button">
+  <FaGoogle /> Sign in with Google
+</button>
+
     </div>
   );
 }
