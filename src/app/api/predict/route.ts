@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     // Predict using backend
     const uploadForm = new FormData();
     uploadForm.append("file", image);
-    uploadForm.append("text", text && text.trim() ? text : "");
+    uploadForm.append("text", String(text || " "));
 
     const backendResponse = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/predict`,
@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
             session.user.user_metadata?.full_name ||
             session.user.user_metadata?.name ||
             "Anonymous",
-          notes: text,
+          notes: text && text.trim() ? text : null,
           prediction: age,
           image_url: publicUrl,
           user_id: session.user.id,
