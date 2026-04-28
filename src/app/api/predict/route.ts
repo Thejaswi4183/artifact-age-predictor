@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     // Predict using backend
     const uploadForm = new FormData();
     uploadForm.append("file", image);
-    uploadForm.append("text", text || "");
+    uploadForm.append("text", text ?? "");
 
     const backendResponse = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/predict`,
